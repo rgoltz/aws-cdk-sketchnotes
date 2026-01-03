@@ -101,7 +101,7 @@ npx jest aws-logs/test/loggroup.test.ts --testNamePattern="DateOfBirth"
 
 <details>
 
-<summary>Example for Unit-Test in Shell</summary>
+<summary> [expand me *click*] Example for Unit-Test in Shell</summary>
 
 ```
 robert@fedora:~/git/github/aws-cdk/packages/aws-cdk-lib$ npx jest aws-logs/test/loggroup.test.ts --testNamePattern="DateOfBirth"
@@ -207,10 +207,9 @@ npx integ-runner --parallel-regions us-west-2 --update-on-failed test/aws-logs/t
 
 <details>
 
-<summary>Example Integration Test Output (Deploy to Account as CloudFormation Stack and Template Update)</summary>
+<summary>[expand me *click*] Example Integration Test Output (Deploy to Account as CloudFormation Stack and Template Update)</summary>
 
 ```
-
 Verifying integration test snapshots...
 
   CHANGED    aws-logs/test/integ.log-group 1.901s
@@ -279,7 +278,7 @@ Tests:    1 passed, 1 total
 </details>
 <br>
 
-#### Additional Integration Test Commands
+### 8. Additional Integration Test Commands
 
 ```bash
 # Run the Linter locally
