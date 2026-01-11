@@ -54,28 +54,36 @@ aws sts get-caller-identity
 For new or temporary accounts, bootstrap CDK (replace with the account ID):
 
 ```bash
-cdk bootstrap 1234567890/us-west-2
+cdk bootstrap 1234567890/us-west-2 --no-use-default-kms --no-execution-role
 ```
 
 ## Development Workflow
 
-### 1. Install Dependencies
+### 1. Check and/or Change your local git branch
+
+Directory: `~/git/github/aws-cdk/` (root)
+```bash
+git branch --show current
+```
+
+### 2. Install Dependencies
 
 Directory: `~/git/github/aws-cdk/` (root)
 ```bash
 yarn install
 ```
 
-### 2. Build Integration Test Framework
+### 3. Build Integration Test Framework
 
 Directory: `~/git/github/aws-cdk/` (root)
 ```bash
 npx lerna run build --scope=@aws-cdk-testing/framework-integ
 ```
+Note: The parameter `--skip-nx-cache` could help as well.
 
 **Important**: The integ-runner works with compiled JavaScript files (.js), not TypeScript files (.ts)!
 
-### 3. Code Changes
+### 4. Code Changes
 
 Make changes in the appropriate package path: `packages/aws-cdk-lib/<aws-component>`
 
@@ -83,7 +91,7 @@ Examples:
 * `packages/aws-cdk-lib/aws-logs/lib/data-protection-policy.ts`
 * `packages/aws-cdk-lib/aws-elasticloadbalancingv2/lib/alb/application-load-balancer.ts`
 
-### 4. Unit Tests
+### 5. Unit Tests
 
 Unit tests are located in corresponding test directories:
 
@@ -95,6 +103,7 @@ Unit tests are located in corresponding test directories:
 Directory: `~/git/github/aws-cdk/packages/aws-cdk-lib/`
 
 Command:
+(!) Here .ts file is used.
 
 ```bash
 # ensure that you are on the correct git branch - could be checked via: git branch --show current
@@ -196,11 +205,12 @@ Example PR: https://github.com/aws/aws-cdk/pull/36558
 
 Now the AWS account comes into play. Integration tests need updates, and the integ-runner handles this.
 
-#### Update Integration Test Snapshots
+#### Running Integration Test and Update Snapshots
 
 Directory: `~/git/github/aws-cdk/packages/@aws-cdk-testing/framework-integ/`
 
 Command to update snapshots and CloudFormation templates:
+(!) Here .js file is used!
 
 ```bash
 npx integ-runner --parallel-regions us-west-2 --update-on-failed test/aws-logs/test/integ.log-group.js
